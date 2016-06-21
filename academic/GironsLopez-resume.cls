@@ -10,6 +10,18 @@
 \RequirePackage[absolute]{textpos} % date
 \RequirePackage[UKenglish]{isodate} % date
 \RequirePackage[hidelinks]{hyperref} % hyperlinks
+\RequirePackage{lastpage}
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+% Color definitions
+\definecolor{date}{HTML}{666666}
+\definecolor{primary}{HTML}{2b2b2b}
+\definecolor{headings}{HTML}{838B83}
+\definecolor{subheadings}{HTML}{333333}
 
 % Date command
 \setlength{\TPHorizModule}{1mm}
@@ -27,7 +39,7 @@
 	\centering{
 		\fontsize{20pt}{40pt}
 		\fontfamily{ppl}\selectfont #1
-		\fontfamily{ppl}\selectfont \textbf{#2}
+		\fontfamily{ppl}\selectfont \color{headings} \textbf{#2}
 	}
 }
 
@@ -49,20 +61,22 @@
 
 % Headings command
 \titleformat{\section}{
+	\color{headings}
 	\Large
 	\scshape
 	\raggedright
-	\fontsize{16pt}{20pt}
+	\fontsize{20pt}{24pt}
 	\fontfamily{phv}\selectfont
 }{}{0em}{}
 
 % Subheadings command
 \titleformat{\subsection}{
-	\bfseries
+	\color{headings}
+	%\bfseries
 	%\large
 	\scshape
 	\raggedright
-	\fontsize{11pt}{13pt}
+	\fontsize{14pt}{18pt}
 	\fontfamily{phv}\selectfont
 }{}{0em}{}
 
@@ -105,6 +119,7 @@
 
 % Normal text
 \newcommand{\text}[1]{
+	\raggedright
 	\fontsize{11pt}{13pt}
 	\fontfamily{ppl}\selectfont {#1}
 	\normalfont
