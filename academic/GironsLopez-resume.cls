@@ -10,6 +10,7 @@
 \RequirePackage[absolute]{textpos} % date
 \RequirePackage[UKenglish]{isodate} % date
 \RequirePackage[hidelinks]{hyperref} % hyperlinks
+
 \RequirePackage{lastpage}
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
@@ -17,11 +18,11 @@
 \fancyhead{}
 \cfoot{\thepage\ of \pageref{LastPage}}
 
+\setlength{\parskip}{1em}
+
 % Color definitions
-\definecolor{date}{HTML}{666666}
-\definecolor{primary}{HTML}{2b2b2b}
-\definecolor{headings}{HTML}{838B83}
-\definecolor{subheadings}{HTML}{333333}
+\definecolor{headings}{HTML}{4183C4}
+\definecolor{subheadings}{HTML}{838B83}
 
 % Date command
 \setlength{\TPHorizModule}{1mm}
@@ -58,6 +59,7 @@
 \titlespacing{\section}{0pt}{0pt}{0pt}
 \titlespacing{\subsection}{0pt}{0pt}{0pt}
 \newcommand{\sectionsep}{\vspace{8pt}}
+\newcommand{\headersep}{\vspace{28pt}}
 
 % Headings command
 \titleformat{\section}{
@@ -71,51 +73,12 @@
 
 % Subheadings command
 \titleformat{\subsection}{
-	\color{headings}
-	%\bfseries
-	%\large
+	\color{subheadings}
 	\scshape
 	\raggedright
 	\fontsize{14pt}{18pt}
 	\fontfamily{phv}\selectfont
 }{}{0em}{}
-
-\newcommand{\runsubsection}[1]{
-	\fontsize{11pt}{13pt}
-	\fontfamily{phv}\selectfont
-	\bfseries
-	\uppercase {#1}
-	\normalfont
-}
-
-% Descriptors command
-\newcommand{\descript}[1]{
-	\raggedright
-	\scshape
-	\fontsize{11pt}{13pt}
-	\fontfamily{phv}\selectfont {#1 \\}
-	\normalfont
-}
-
-% Location command
-\newcommand{\location}[1]{
-	\raggedright
-	\fontsize{10pt}{12pt}
-	\fontfamily{ppl}\selectfont {#1 \\}
-	\normalfont
-}
-
-% Bullet Lists with fewer gaps command
-\newenvironment{tightemize}{
-	\fontsize{10pt}{11pt}
-	\fontfamily{ppl}\selectfont
-	\vspace{-\topsep}
-	\begin{itemize}
-		\itemsep1pt
-		\parskip0pt
-		\parsep0pt
-	}
-	{\end{itemize}\vspace{-\topsep}}
 
 % Normal text
 \newcommand{\text}[1]{
