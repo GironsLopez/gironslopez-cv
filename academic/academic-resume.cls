@@ -1,6 +1,6 @@
 % Intro Options
 \NeedsTeXFormat{LaTeX2e} % document version
-\ProvidesClass{gironslopez-resume}[2016/06/21 Custom CV class] % custom class
+\ProvidesClass{academic-resume}[2016/06/21 Custom CV class] % custom class
 \LoadClass[a4paper]{article} % base class
 
 % Packages
@@ -38,7 +38,7 @@
 % Name and contact information
 \newcommand{\name}[2]{
 	\centering{
-		\fontsize{20pt}{40pt}
+		\fontsize{30pt}{50pt}
 		\fontfamily{ppl}\selectfont #1
 		\fontfamily{ppl}\selectfont \color{headings} \textbf{#2}
 	}
