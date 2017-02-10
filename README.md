@@ -1,1 +1,1 @@
-# GironsLopez-Resume
+# gironslopez-cv
