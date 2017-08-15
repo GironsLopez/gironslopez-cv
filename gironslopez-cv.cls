@@ -6,6 +6,12 @@
 \ProvidesClass{gironslopez-cv}
 \LoadClass[a4paper]{article}  % base class
 
+%-------------------------------------
+% Create switches
+\newif\ifswedish
+\newif\ifacademic
+\newif\ifpicture
+
 %-------------------------------------------------------------------------------
 % Packages
 %-------------------------------------------------------------------------------
@@ -13,8 +19,8 @@
 %-------------------------------------
 % page structure
 \RequirePackage[
-    hmargin = 2.0cm,
-    vmargin = 2.0cm
+    hmargin = 1.75cm,
+    vmargin = 1.75cm
 ]{geometry}
 
 \RequirePackage[
@@ -22,6 +28,16 @@
 ]{textpos}
 
 \RequirePackage{titlesec}
+
+\RequirePackage{parskip}
+
+%\ifacademic
+%    \pagestyle{plain}
+%\else
+%    \pagestyle{empty}
+%\fi
+
+\hyphenpenalty=100000
 
 %-------------------------------------
 % hyperlinks
@@ -41,6 +57,7 @@
     english
 ]{babel}
 
+%-------------------------------------
 % Color
 \RequirePackage[
     usenames,
@@ -78,19 +95,14 @@
 %-------------------------------------------------------------------------------
 
 %-------------------------------------
-% Create switches
-\newif\ifswedish
-\newif\ifacademic
-\newif\ifpicture
-
-%-------------------------------------
 % Text and paragraph formatting
 \setlength{\parindent}{0pt}
-% \setlength{\parskip}{6pt}
 \setlength{\parskip}{0pt}
+
 \linespread{1.1}
-% \titlespacing{\section}{0pt}{12pt}{6pt}
-\titlespacing{\section}{0pt}{6pt}{3pt}
+
+\titlespacing{\section}{0pt}{12pt}{0pt}
+\titlespacing{\subsection}{0pt}{6pt}{0pt}
 
 %-------------------------------------
 % Color
@@ -144,7 +156,7 @@
     \sffamily
     \scshape
     \bfseries
-    \fontsize{16pt}{18pt}
+    \fontsize{18pt}{20pt}
     \selectfont
     \raggedright
 }{}{0em}{}
@@ -167,7 +179,6 @@
     \color{text}
     \mdseries
     \itshape
-    %\fontsize{10pt}{12pt}
     \selectfont #1
 }
 
@@ -176,14 +187,12 @@
 \newcommand{\where}[1]{
     \color{Gray}
     \mdseries
-    %\fontsize{11pt}{13pt}
     \selectfont #1
 }
 
 \newcommand{\what}[1]{
     \bfseries
     \color{focus}
-    %\fontsize{11pt}{13pt}
     \selectfont #1
 }
 
@@ -192,7 +201,6 @@
 \newcommand{\main}[1]{
     \bfseries
     \color{text}
-    %\fontsize{11pt}{14pt}
     \selectfont #1
 }
 
@@ -201,7 +209,6 @@
 \newcommand{\descript}[1]{
 	\color{text}
     \mdseries
-    %\fontsize{11pt}{14pt}
     \selectfont #1
 }
 
@@ -209,14 +216,12 @@
     \itshape
     \mdseries
     \color{text}
-    %\fontsize{11pt}{14pt}
     \selectfont #1
 }
 
 \newcommand{\focusdescript}[1]{
     \color{focus}
     \mdseries
-    %\fontsize{11pt}{14pt}
     \selectfont #1
 }
 
@@ -256,10 +261,34 @@
     }
 }
 
+%-------------------------------------
+% CV item
 \newcommand{\position}[4]{
     \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
         \when{#1} & \what{#2} \descript{•} \where{#3} \newline \descript{#4}
-    \end{tabular}
+    \end{tabular}\newline
+}
+
+\newcommand{\shortposition}[3]{
+	\begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+		\when{#1} & \what{#2} \descript{•} \where{#3}
+	\end{tabular}\newline
+}
+
+\newcommand{\skill}[2]{
+    \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+        \main{#1} & \descript{#2}
+    \end{tabular}\newline
+}
+
+\newcommand{\languages}[4]{
+    \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+        \main{\ifswedish Språk \else Languages \fi}
+        & \what{\ifswedish Modersmål \else Native \fi} \descript{#1} \\
+        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} \descript{#2} \\
+        & \what{\ifswedish Självständig \else Professional working proficiency \fi} \descript{#3} \\
+        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} \descript{#4} \\
+    \end{tabular}\newline
 }
 
 %-------------------------------------
@@ -281,34 +310,16 @@
 % https://tex.stackexchange.com/questions/274436/highlight-an-author-in-bibliography-using-biblatex-allowing-bibliography-style-t
 
 \newbibmacro*{name:bold}[2]{%
-    \def
-    \do##1{
-        \iffieldequalstr{hash}{##1}{\bfseries\listbreak}{}
-    }%
+    \def\do##1{\iffieldequalstr{hash}{##1}{\bfseries\listbreak}{}}%
     \dolistloop{\boldnames}%
 }
 
 \newcommand*{\boldnames}{}
 
-\xpretobibmacro{name:family}{
-    \begingroup
-    \usebibmacro{name:bold}{#1}{#2}
-}{}{}
-
-\xpretobibmacro{name:given-family}{
-    \begingroup
-    \usebibmacro{name:bold}{#1}{#2}
-}{}{}
-
-\xpretobibmacro{name:family-given}{
-    \begingroup
-    \usebibmacro{name:bold}{#1}{#2}
-}{}{}
-
-\xpretobibmacro{name:delim}{
-    \begingroup
-    \normalfont
-}{}{}
+\xpretobibmacro{name:family}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:given-family}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:family-given}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:delim}{\begingroup\normalfont}{}{}
 
 \xapptobibmacro{name:family}{\endgroup}{}{}
 \xapptobibmacro{name:given-family}{\endgroup}{}{}
