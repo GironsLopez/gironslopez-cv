@@ -1,8 +1,9 @@
 
 \documentclass{gironslopez-cv}
 
+% Switches
 \swedishfalse
-\academicfalse
+\academictrue
 \picturefalse
 
 \begin{document}
@@ -21,12 +22,32 @@
 
     % Education
     \input{sections/education}
+    
+    \newpage
 
     % Publications
     \input{sections/publications}
     
+    % Teaching
+    \ifacademic
+        \input{sections/teaching}
+    \else
+    \fi
+    
+    % Representation
+    \ifacademic
+        \input{sections/representation}
+    \else
+    \fi
+    
     % Skills
     \input{sections/skills}
+    
+    % Awards
+    \input{sections/awards}
+    
+    % Other activities
+    \input{sections/activities}
     
     % References
     \vfill
