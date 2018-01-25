@@ -1,26 +1,28 @@
-%-------------------------------------------------------------------------------
-% Introduction
-%-------------------------------------------------------------------------------
+%===============================================================================
+% INTRODUCTION
+%===============================================================================
 
 \NeedsTeXFormat{LaTeX2e}  % document version
 \ProvidesClass{gironslopez-cv}
 \LoadClass[a4paper]{article}  % base class
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Create switches
+
 \newif\ifswedish
 \newif\ifacademic
 \newif\ifpicture
 
-%-------------------------------------------------------------------------------
-% Packages
-%-------------------------------------------------------------------------------
+%===============================================================================
+% PACKAGES
+%===============================================================================
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % page structure
+
 \RequirePackage[
-    hmargin = 1.75cm,
-    vmargin = 1.75cm
+    hmargin = 2.50cm,
+    vmargin = 2.50cm
 ]{geometry}
 
 \RequirePackage[
@@ -31,22 +33,16 @@
 
 \RequirePackage{parskip}
 
-%\ifacademic
-%    \pagestyle{plain}
-%\else
-%    \pagestyle{empty}
-%\fi
-
-\hyphenpenalty=100000
-
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % hyperlinks
+
 \RequirePackage[
     colorlinks = true
 ]{hyperref}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Language
+
 \RequirePackage[
     swedish,
     english
@@ -57,24 +53,28 @@
     english
 ]{babel}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Color
+
 \RequirePackage[
     usenames,
     dvipsnames
 ]{xcolor}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Fonts
+
 \RequirePackage{fontspec}
 \RequirePackage[T1]{fontenc}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Images
+
 \RequirePackage{graphicx}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % References
+
 \RequirePackage{xpatch}
 \RequirePackage[
     backend    = biber,
@@ -90,12 +90,13 @@
 \addbibresource{pub/publications.bib}
 \DeclareNameAlias{sortname}{family-given}
 
-%-------------------------------------------------------------------------------
-% Definitions
-%-------------------------------------------------------------------------------
+%===============================================================================
+% DEFINITIONS
+%===============================================================================
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Text and paragraph formatting
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 
@@ -104,14 +105,16 @@
 \titlespacing{\section}{0pt}{12pt}{0pt}
 \titlespacing{\subsection}{0pt}{6pt}{0pt}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Color
+
 \definecolor{focus}{HTML}{4183C4}
 \definecolor{text}{HTML}{1C1C1C}
 \hypersetup{urlcolor = focus}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Fonts
+
 \setmainfont[
     Path        = fonts/Raleway/,
     UprightFont = *-Light,
@@ -126,12 +129,13 @@
     BoldFont    = *-Regular
 ]{Lato}
 
-%-------------------------------------------------------------------------------
-% Commands
-%-------------------------------------------------------------------------------
+%===============================================================================
+% COMMANDS
+%===============================================================================
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Last modification date
+
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
 
@@ -149,8 +153,9 @@
     \end{textblock}
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Section
+
 \titleformat{\section}{
     \color{focus}
     \sffamily
@@ -161,8 +166,9 @@
     \raggedright
 }{}{0em}{}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Subsection
+
 \titleformat{\subsection}{
     \color{Gray}
     \sffamily
@@ -173,8 +179,9 @@
     \raggedright
 }{}{0em}{}
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Times
+
 \newcommand{\when}[1]{
     \color{text}
     \mdseries
@@ -182,8 +189,9 @@
     \selectfont #1
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Titles
+
 \newcommand{\where}[1]{
     \color{Gray}
     \mdseries
@@ -196,16 +204,18 @@
     \selectfont #1
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Highlighted text
+
 \newcommand{\main}[1]{
     \bfseries
     \color{text}
     \selectfont #1
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Normal text (descriptions)
+
 \newcommand{\descript}[1]{
 	\color{text}
     \mdseries
@@ -225,8 +235,9 @@
     \selectfont #1
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Name information
+
 \newcommand{\name}[2]{
     \centering{
         \fontsize{36pt}{40pt}
@@ -241,8 +252,9 @@
     }
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Contact information
+
 \newcommand{\contact}[8]{
     \centering{
         \begin{tabular}{r l r l}
@@ -261,38 +273,40 @@
     }
 }
 
-%-------------------------------------
-% CV item
+%-------------------------------------------------------------------------------
+% CV items
+
 \newcommand{\position}[4]{
-    \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
         \when{#1} & \what{#2} \descript{•} \where{#3} \newline \descript{#4}
-    \end{tabular}\newline
+    \end{tabular}\\[-2mm]
 }
 
 \newcommand{\shortposition}[3]{
-	\begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
 		\when{#1} & \what{#2} \descript{•} \where{#3}
-	\end{tabular}\newline
+	\end{tabular}\\[-2mm]
 }
 
 \newcommand{\skill}[2]{
-    \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
         \main{#1} & \descript{#2}
-    \end{tabular}\newline
+    \end{tabular}\\[-2mm]
 }
 
 \newcommand{\languages}[4]{
-    \begin{tabular}{p{0.20\textwidth} p{0.75\textwidth}}
+    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
         \main{\ifswedish Språk \else Languages \fi}
-        & \what{\ifswedish Modersmål \else Native \fi} \descript{#1} \\
-        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} \descript{#2} \\
-        & \what{\ifswedish Självständig \else Professional working proficiency \fi} \descript{#3} \\
-        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} \descript{#4} \\
-    \end{tabular}\newline
+        & \what{\ifswedish Modersmål \else Native \fi} \descript{#1} \\[-2mm]
+        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} \descript{#2} \\[-2mm]
+        & \what{\ifswedish Självständig \else Professional working proficiency \fi} \descript{#3} \\[-2mm]
+        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} \descript{#4}
+    \end{tabular}\\[-2mm]
 }
 
-%-------------------------------------
+%-------------------------------------------------------------------------------
 % Separators
+
 \newcommand{\sectionsep}{\vspace{6pt}}
 
 \newcommand{\sectionline}{
@@ -303,9 +317,9 @@
     }
 }
 
-%-------------------------------------------------------------------------------
-% Bibliography - Use bold face for my name
-%-------------------------------------------------------------------------------
+%===============================================================================
+% BIBLIOGRAPHY - Use bold face for my name
+%===============================================================================
 % Approach by user "moewe" in Stack Exchange
 % https://tex.stackexchange.com/questions/274436/highlight-an-author-in-bibliography-using-biblatex-allowing-bibliography-style-t
 
