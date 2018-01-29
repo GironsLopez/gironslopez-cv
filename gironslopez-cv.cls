@@ -289,13 +289,13 @@
 }
 
 \newcommand{\skill}[2]{
-    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
         \main{#1} & \descript{#2}
     \end{tabular}\\[-2mm]
 }
 
 \newcommand{\languages}[4]{
-    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
         \main{\ifswedish Språk \else Languages \fi}
         & \what{\ifswedish Modersmål \else Native \fi} \descript{#1} \\[-2mm]
         & \what{\ifswedish Avancerad \else Full professional proficiency \fi} \descript{#2} \\[-2mm]
