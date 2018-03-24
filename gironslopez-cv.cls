@@ -33,6 +33,8 @@
 
 \RequirePackage{parskip}
 
+\RequirePackage{setspace}
+
 %-------------------------------------------------------------------------------
 % hyperlinks
 
@@ -81,7 +83,7 @@
     style      = authoryear,
     sorting    = ydnt,
     dashed     = false,
-    maxnames   = 10,
+    maxnames   = 20,
     url        = false,
     doi        = true,
     eprint     = false,
@@ -295,12 +297,13 @@
 }
 
 \newcommand{\languages}[4]{
-    \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
+    \begin{tabular}{\ifswedish p{0.24\textwidth} p{0.14\textwidth} p{0.55\textwidth}
+    		        \else p{0.24\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
         \main{\ifswedish Språk \else Languages \fi}
-        & \what{\ifswedish Modersmål \else Native \fi} \descript{#1} \\[-2mm]
-        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} \descript{#2} \\[-2mm]
-        & \what{\ifswedish Självständig \else Professional working proficiency \fi} \descript{#3} \\[-2mm]
-        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} \descript{#4}
+        & \what{\ifswedish Modersmål \else Native \fi} & \descript{#1} \\[-2mm]
+        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} & \descript{#2} \\[-2mm]
+        & \what{\ifswedish Självständig \else Professional working proficiency \fi} & \descript{#3} \\[-2mm]
+        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} & \descript{#4}
     \end{tabular}\\[-2mm]
 }
 
