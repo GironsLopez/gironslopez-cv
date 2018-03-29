@@ -2,16 +2,17 @@
 % INTRODUCTION
 %===============================================================================
 
-\NeedsTeXFormat{LaTeX2e}  % document version
-\ProvidesClass{gironslopez-cv}
-\LoadClass[a4paper]{article}  % base class
+\NeedsTeXFormat{LaTeX2e}        % LaTeX format
+\ProvidesClass{gironslopez-cv}  % Document class
+\LoadClass[a4paper]{article}    % Base class
 
 %-------------------------------------------------------------------------------
 % Create switches
 
-\newif\ifswedish
-\newif\ifacademic
-\newif\ifpicture
+\newif\ifswedish   % Use Swedish language version of the document.
+\newif\ifacademic  % Use academic version of the document.
+\newif\ifpicture   % Show the profile picture in the document.
+\newif\ifnumbers   % Show page numbers.
 
 %===============================================================================
 % PACKAGES
@@ -21,12 +22,12 @@
 % page structure
 
 \RequirePackage[
-    hmargin = 2.50cm,
-    vmargin = 2.50cm
+  hmargin = 2.50cm,
+  vmargin = 2.50cm
 ]{geometry}
 
 \RequirePackage[
-    absolute
+  absolute
 ]{textpos}
 
 \RequirePackage{titlesec}
@@ -35,39 +36,46 @@
 
 \RequirePackage{setspace}
 
+\RequirePackage{ragged2e}
+
+\RequirePackage{fancyhdr}
+
+\RequirePackage{lastpage}
+
 %-------------------------------------------------------------------------------
 % hyperlinks
 
 \RequirePackage[
-    colorlinks = true
+  colorlinks = true
 ]{hyperref}
 
 %-------------------------------------------------------------------------------
 % Language
 
 \RequirePackage[
-    swedish,
-    english
+  swedish,
+  english
 ]{isodate}
 
 \RequirePackage[
-    swedish,
-    english
+  swedish,
+  english
 ]{babel}
 
 %-------------------------------------------------------------------------------
 % Color
 
 \RequirePackage[
-    usenames,
-    dvipsnames
+  usenames,
+  dvipsnames
 ]{xcolor}
 
 %-------------------------------------------------------------------------------
-% Fonts
+% Fonts and encoding
 
 \RequirePackage{fontspec}
 \RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
 
 %-------------------------------------------------------------------------------
 % Images
@@ -79,15 +87,15 @@
 
 \RequirePackage{xpatch}
 \RequirePackage[
-    backend    = biber,
-    style      = authoryear,
-    sorting    = ydnt,
-    dashed     = false,
-    maxnames   = 20,
-    url        = false,
-    doi        = true,
-    eprint     = false,
-    firstinits = true
+  backend    = biber,
+  style      = authoryear,
+  sorting    = ydnt,
+  dashed     = false,
+  maxnames   = 20,
+  url        = false,
+  doi        = true,
+  eprint     = false,
+  firstinits = true
 ]{biblatex}
 \addbibresource{pub/publications.bib}
 \DeclareNameAlias{sortname}{family-given}
@@ -95,6 +103,20 @@
 %===============================================================================
 % DEFINITIONS
 %===============================================================================
+
+%-------------------------------------------------------------------------------
+% Page formatting
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}  % Remove header line
+\cfoot{
+ \ifnumbers
+   \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+ \else
+ \fi
+}
 
 %-------------------------------------------------------------------------------
 % Text and paragraph formatting
@@ -118,17 +140,17 @@
 % Fonts
 
 \setmainfont[
-    Path        = fonts/Raleway/,
-    UprightFont = *-Light,
-    ItalicFont  = *-LightItalic,
-    BoldFont    = *-SemiBold
+  Path        = fonts/Raleway/,
+  UprightFont = *-Light,
+  ItalicFont  = *-LightItalic,
+  BoldFont    = *-SemiBold
 ]{Raleway}
 
 \setsansfont[
-    Path        = fonts/Lato/,
-    UprightFont = *-Hairline,
-    ItalicFont  = *-Light,  % Dirty hack to easily use Lato-Light if ItalicFont is not needed
-    BoldFont    = *-Regular
+  Path        = fonts/Lato/,
+  UprightFont = *-Hairline,
+  ItalicFont  = *-Light,  % Dirty hack to easily use Lato-Light if ItalicFont is not needed
+  BoldFont    = *-Regular
 ]{Lato}
 
 %===============================================================================
@@ -138,173 +160,182 @@
 %-------------------------------------------------------------------------------
 % Last modification date
 
-\setlength{\TPHorizModule}{1mm}
-\setlength{\TPVertModule}{1mm}
+\fancypagestyle{datestyle}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}  % Remove header line
+  \fancyhead[R]{
+  	\color{Gray}
+  	\fontsize{8pt}{10pt}
+  	\mdseries
+  	\ifswedish
+  	  \selectlanguage{swedish}
+  	  \selectfont \today
+  	\else
+  	  \selectfont \today
+  	\fi
+  }
+  \cfoot{
+  \ifnumbers
+    \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+  \else
+  \fi
+}
+}
 
 \newcommand{\lastupdated}{
-    \begin{textblock}{60}(155,5)
-        \color{Gray}
-        \fontsize{8pt}{10pt}
-        \mdseries
-        \ifswedish
-            \selectlanguage{swedish}
-            \selectfont Senast uppdaterad den \today
-        \else
-            \selectfont Last Updated on \today
-        \fi
-    \end{textblock}
+  \thispagestyle{datestyle}
 }
 
 %-------------------------------------------------------------------------------
 % Section
 
 \titleformat{\section}{
-    \color{focus}
-    \sffamily
-    \scshape
-    \bfseries
-    \fontsize{18pt}{20pt}
-    \selectfont
-    \raggedright
+  \color{focus}
+  \sffamily
+  \scshape
+  \bfseries
+  \fontsize{18pt}{20pt}
+  \selectfont
+  \raggedright
 }{}{0em}{}
 
 %-------------------------------------------------------------------------------
 % Subsection
 
 \titleformat{\subsection}{
-    \color{Gray}
-    \sffamily
-    \scshape
-    \bfseries
-    \fontsize{14pt}{16pt}
-    \selectfont
-    \raggedright
+  \color{Gray}
+  \sffamily
+  \scshape
+  \bfseries
+  \fontsize{14pt}{16pt}
+  \selectfont
+  \raggedright
 }{}{0em}{}
 
 %-------------------------------------------------------------------------------
 % Times
 
 \newcommand{\when}[1]{
-    \color{text}
-    \mdseries
-    \itshape
-    \selectfont #1
+  \color{text}
+  \mdseries
+  \itshape
+  \selectfont #1
 }
 
 %-------------------------------------------------------------------------------
 % Titles
 
 \newcommand{\where}[1]{
-    \color{Gray}
-    \mdseries
-    \selectfont #1
+  \color{Gray}
+  \mdseries
+  \selectfont #1
 }
 
 \newcommand{\what}[1]{
-    \bfseries
-    \color{focus}
-    \selectfont #1
+  \bfseries
+  \color{focus}
+  \selectfont #1
 }
 
 %-------------------------------------------------------------------------------
 % Highlighted text
 
 \newcommand{\main}[1]{
-    \bfseries
-    \color{text}
-    \selectfont #1
+  \bfseries
+  \color{text}
+  \selectfont #1
 }
 
 %-------------------------------------------------------------------------------
 % Normal text (descriptions)
 
 \newcommand{\descript}[1]{
-	\color{text}
-    \mdseries
-    \selectfont #1
+  \color{text}
+  \mdseries
+  \selectfont #1
 }
 
 \newcommand{\italicdescript}[1]{
-    \itshape
-    \mdseries
-    \color{text}
-    \selectfont #1
+  \itshape
+  \mdseries
+  \color{text}
+  \selectfont #1
 }
 
 \newcommand{\focusdescript}[1]{
-    \color{focus}
-    \mdseries
-    \selectfont #1
+  \color{focus}
+  \mdseries
+  \selectfont #1
 }
 
 %-------------------------------------------------------------------------------
 % Name information
 
 \newcommand{\name}[2]{
-    \centering{
-        \fontsize{36pt}{40pt}
-        \color{text}
-        \sffamily
-        \mdseries
-        \selectfont #1
-        \color{focus}
-        \sffamily
-        \itshape  % in this context it represents Lato-Light
-        \selectfont #2
-    }
+  \centering{
+    \fontsize{36pt}{40pt}
+    \color{text}
+    \sffamily
+    \mdseries
+    \selectfont #1
+    \color{focus}
+    \sffamily
+    \itshape  % in this context it represents Lato-Light
+    \selectfont #2
+  }
 }
 
 %-------------------------------------------------------------------------------
 % Contact information
 
 \newcommand{\contact}[8]{
-    \centering{
-        \begin{tabular}{r l r l}
-            \main{\ifswedish Adress \else Address \fi} & \descript{#1} &
-            \main{\ifswedish Hemsida \else Website \fi} & \descript{#5} \\
+  \centering{
+    \begin{tabular}{r l r l}
+      \main{\ifswedish Adress \else Address \fi} & \descript{#1} &
+      \main{\ifswedish Hemsida \else Website \fi} & \descript{#5} \\
 
-            & \descript{#2} &
-            \main{\ifswedish Telefon \else Telephone \fi} & \descript{#6} \\
+      & \descript{#2} &
+      \main{\ifswedish Telefon \else Telephone \fi} & \descript{#6} \\
 
-            \main{\ifswedish Födelse \else Birth \fi} & \descript{#3} &
-            \main{\ifswedish E-post \else E-mail \fi} & \descript{#7} \\
+      \main{\ifswedish Födelse \else Birth \fi} & \descript{#3} &
+      \main{\ifswedish E-post \else E-mail \fi} & \descript{#7} \\
 
-            & \descript{#4}
-            & \main{\ifswedish Medborgarskap \else Citizenship \fi} & \descript{#8} \\
-        \end{tabular}
-    }
+      & \descript{#4}
+      & \main{\ifswedish Medborgarskap \else Citizenship \fi} & \descript{#8} \\
+    \end{tabular}
+  }
 }
 
 %-------------------------------------------------------------------------------
 % CV items
 
 \newcommand{\position}[4]{
-    \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
-        \when{#1} & \what{#2} \descript{•} \where{#3} \newline \descript{#4}
-    \end{tabular}\\[-2mm]
+  \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \when{#1} & \what{#2} \descript{•} \where{#3} \newline \descript{#4}
+  \end{tabular}\\[-2mm]
 }
 
 \newcommand{\shortposition}[3]{
-	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
-		\when{#1} & \what{#2} \descript{•} \where{#3}
-	\end{tabular}\\[-2mm]
+  \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \when{#1} & \what{#2} \descript{•} \where{#3}
+  \end{tabular}\\[-2mm]
 }
 
 \newcommand{\skill}[2]{
-    \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
-        \main{#1} & \descript{#2}
-    \end{tabular}\\[-2mm]
+  \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
+    \main{#1} & \descript{#2}
+  \end{tabular}\\[-2mm]
 }
 
 \newcommand{\languages}[4]{
-    \begin{tabular}{\ifswedish p{0.24\textwidth} p{0.14\textwidth} p{0.55\textwidth}
-    		        \else p{0.24\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
-        \main{\ifswedish Språk \else Languages \fi}
-        & \what{\ifswedish Modersmål \else Native \fi} & \descript{#1} \\[-2mm]
-        & \what{\ifswedish Avancerad \else Full professional proficiency \fi} & \descript{#2} \\[-2mm]
-        & \what{\ifswedish Självständig \else Professional working proficiency \fi} & \descript{#3} \\[-2mm]
-        & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} & \descript{#4}
-    \end{tabular}\\[-2mm]
+  \begin{tabular}{\ifswedish p{0.24\textwidth} p{0.14\textwidth} p{0.55\textwidth}
+                  \else p{0.24\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
+    \main{\ifswedish Språk \else Languages \fi}
+    & \what{\ifswedish Modersmål \else Native \fi} & \descript{#1} \\[-2mm]
+    & \what{\ifswedish Avancerad \else Full professional proficiency \fi} & \descript{#2} \\[-2mm]
+    & \what{\ifswedish Självständig \else Professional working proficiency \fi} & \descript{#3} \\[-2mm]
+    & \what{\ifswedish Nybörjare \else Elementary proficiency \fi} & \descript{#4}
+  \end{tabular}\\[-2mm]
 }
 
 %-------------------------------------------------------------------------------
@@ -313,11 +344,11 @@
 \newcommand{\sectionsep}{\vspace{6pt}}
 
 \newcommand{\sectionline}{
-    \color{focus}
-    \vspace{6pt}
-    \makebox[\linewidth]{
-        \rule{\textwidth}{0.5pt}
-    }
+  \color{focus}
+  \vspace{6pt}
+  \makebox[\linewidth]{
+    \rule{\textwidth}{0.5pt}
+  }
 }
 
 %===============================================================================
@@ -327,8 +358,8 @@
 % https://tex.stackexchange.com/questions/274436/highlight-an-author-in-bibliography-using-biblatex-allowing-bibliography-style-t
 
 \newbibmacro*{name:bold}[2]{%
-    \def\do##1{\iffieldequalstr{hash}{##1}{\bfseries\listbreak}{}}%
-    \dolistloop{\boldnames}%
+  \def\do##1{\iffieldequalstr{hash}{##1}{\bfseries\listbreak}{}}%
+  \dolistloop{\boldnames}%
 }
 
 \newcommand*{\boldnames}{}
@@ -344,5 +375,4 @@
 \xapptobibmacro{name:delim}{\endgroup}{}{}
 
 \renewcommand*{\boldnames}{}
-\forcsvlist{\listadd\boldnames}
-    {{0a357bfd857161ef8a274bd045039923}}
+\forcsvlist{\listadd\boldnames}{{0a357bfd857161ef8a274bd045039923}}
