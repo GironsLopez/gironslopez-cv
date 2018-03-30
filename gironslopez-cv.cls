@@ -321,6 +321,21 @@
   \end{tabular}\\[-2mm]
 }
 
+\newcommand{\teaching}[4]{
+	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+		\when{#1} & \what{#2} %\descript{•}
+		\newline \where{#3}
+		\newline \descript{#4}
+	\end{tabular}\\[-2mm]
+}
+
+\newcommand{\shortteaching}[3]{
+	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+		\when{#1} & \what{#2} %\descript{•}
+		\newline \where{#3}
+	\end{tabular}\\[-2mm]
+}
+
 \newcommand{\skill}[2]{
   \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
     \main{#1} & \descript{#2}
