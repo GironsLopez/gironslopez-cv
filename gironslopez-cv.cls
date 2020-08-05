@@ -22,8 +22,8 @@
 % page structure
 
 \RequirePackage[
-  hmargin = 2.50cm,
-  vmargin = 2.50cm
+  hmargin = 2.00cm,
+  vmargin = 2.00cm
 ]{geometry}
 
 \RequirePackage[
@@ -337,14 +337,14 @@
 }
 
 \newcommand{\skill}[2]{
-  \begin{tabular}{p{0.24\textwidth} p{0.70\textwidth}}
+  \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
     \main{#1} & \descript{#2}
   \end{tabular}\\[-2mm]
 }
 
 \newcommand{\languages}[4]{
-  \begin{tabular}{\ifswedish p{0.24\textwidth} p{0.14\textwidth} p{0.55\textwidth}
-                  \else p{0.24\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
+  \begin{tabular}{\ifswedish p{0.22\textwidth} p{0.14\textwidth} p{0.55\textwidth}
+                  \else p{0.22\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
     \main{\ifswedish Språk \else Languages \fi}
     & \what{\ifswedish Modersmål \else Native \fi} & \descript{#1} \\[-2mm]
     & \what{\ifswedish Avancerad \else Full professional proficiency \fi} & \descript{#2} \\[-2mm]
