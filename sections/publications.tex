@@ -79,11 +79,17 @@
 \else
   \ifswedish
     \section{Utvalda publikationer}
+      \begin{tabular}{p{\textwidth}}
       \descript{(En heltäckande lista av publikationer finns på \href{https://gironslopez.github.io/publications/}{gironslopez.me/publications}.)}
+      \end{tabular}\\[-2mm]
   \else
     \section{Selected Publications}
+      \begin{tabular}{p{\textwidth}}
       \descript{(A comprehensive list of publications can be found at \href{https://gironslopez.github.io/publications/}{gironslopez.me/publications}.)}
+      \end{tabular}\\[-2mm]
   \fi
+  \newline
+  \begin{tabular}{p{\textwidth}}
   \begin{refsection}
     \vspace{2mm}
     \nocite{
@@ -93,4 +99,5 @@
     }
     \printbibliography[heading=none]
   \end{refsection}
+  \end{tabular}\\[-2mm]
 \fi
