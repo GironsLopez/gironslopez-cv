@@ -1,12 +1,17 @@
 
 \documentclass{gironslopez-cv}
 
-% Switches
+%=============================================================================
+% Set options
+%=============================================================================
 \swedishfalse
 \academicfalse
 \picturefalse
 \numbersfalse
 
+%=============================================================================
+% Make CV
+%=============================================================================
 \begin{document}
   %---------------------------------------------------------------------------
   % Update date
@@ -64,12 +69,14 @@
   %---------------------------------------------------------------------------
   % References
   %
-  \vfill
-  \centering{
-    \ifswedish
-      \textit{Referenser finns tillgängliga på begäran.}
-    \else
-       \textit{References available on request.}
-    \fi
-  }
+  \AtEndDocument{\thispagestyle{empty}}
+  \includeref
+  %\vfill
+  %\centering{
+  %  \ifswedish
+  %    \textit{Referenser finns tillgängliga på begäran.}
+  %  \else
+  %    \textit{References available on request.}
+  %  \fi
+  %}
 \end{document}

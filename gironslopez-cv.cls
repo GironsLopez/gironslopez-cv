@@ -112,10 +112,10 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}  % Remove header line
 \cfoot{
- \ifnumbers
-   \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
- \else
- \fi
+  \ifnumbers
+    \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+  \else
+  \fi
 }
 
 %-------------------------------------------------------------------------------
@@ -164,26 +164,56 @@
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}  % Remove header line
   \fancyhead[R]{
-  	\color{Gray}
-  	\fontsize{8pt}{10pt}
-  	\mdseries
-  	\ifswedish
-  	  \selectlanguage{swedish}
-  	  \selectfont \today
-  	\else
-  	  \selectfont \today
-  	\fi
+    \color{Gray}
+    \fontsize{8pt}{10pt}
+    \mdseries
+    \ifswedish
+      \selectlanguage{swedish}
+      \selectfont \today
+    \else
+      \selectfont \today
+    \fi
   }
-  \cfoot{
   \ifnumbers
-    \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+    \cfoot{
+      \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+    }
   \else
   \fi
-}
 }
 
 \newcommand{\lastupdated}{
   \thispagestyle{datestyle}
+}
+
+%-------------------------------------------------------------------------------
+% Last page
+
+\newcommand{\explainref}{
+  \ifswedish
+    \textit{Referenser finns tillgängliga på begäran.}
+  \else
+    \textit{References available on request.}
+  \fi
+}
+
+\fancypagestyle{refstyle}{
+  \ifnumbers
+    \lfoot{
+      \explainref
+    }
+    \cfoot{
+      \thepage \hspace{1pt} \ifswedish av \else of \fi \pageref*{LastPage}
+    }
+  \else
+    \cfoot{
+      \explainref
+    }
+  \fi
+}
+
+\newcommand{\includeref}{
+  \thispagestyle{refstyle}
 }
 
 %-------------------------------------------------------------------------------
@@ -322,18 +352,18 @@
 }
 
 \newcommand{\teaching}[4]{
-	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
-		\when{#1} & \what{#2} %\descript{•}
-		\newline \where{#3}
-		\newline \descript{#4}
-	\end{tabular}\\[-2mm]
+  \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \when{#1} & \what{#2} %\descript{•}
+    \newline \where{#3}
+    \newline \descript{#4}
+  \end{tabular}\\[-2mm]
 }
 
 \newcommand{\shortteaching}[3]{
-	\begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
-		\when{#1} & \what{#2} %\descript{•}
-		\newline \where{#3}
-	\end{tabular}\\[-2mm]
+  \begin{tabular}{p{0.22\textwidth} p{0.75\textwidth}}
+    \when{#1} & \what{#2} %\descript{•}
+    \newline \where{#3}
+  \end{tabular}\\[-2mm]
 }
 
 \newcommand{\skill}[2]{
@@ -343,8 +373,13 @@
 }
 
 \newcommand{\languages}[4]{
-  \begin{tabular}{\ifswedish p{0.22\textwidth} p{0.14\textwidth} p{0.55\textwidth}
-                  \else p{0.22\textwidth} p{0.35\textwidth} p{0.20\textwidth} \fi}
+  \begin{tabular}{
+      \ifswedish
+        p{0.22\textwidth} p{0.14\textwidth} p{0.55\textwidth}
+      \else
+        p{0.22\textwidth} p{0.35\textwidth} p{0.20\textwidth}
+      \fi
+    }
     \main{\ifswedish Språk \else Languages \fi}
     & \what{\ifswedish Modersmål \else Native \fi} & \descript{#1} \\[-2mm]
     & \what{\ifswedish Avancerad \else Full professional proficiency \fi} & \descript{#2} \\[-2mm]
