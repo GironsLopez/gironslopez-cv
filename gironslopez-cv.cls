@@ -75,7 +75,6 @@
 
 \RequirePackage{fontspec}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
 
 %-------------------------------------------------------------------------------
 % Images
@@ -85,6 +84,7 @@
 %-------------------------------------------------------------------------------
 % References
 
+\RequirePackage{csquotes}
 \RequirePackage{xpatch}
 \RequirePackage[
   backend    = biber,
@@ -95,7 +95,8 @@
   url        = false,
   doi        = true,
   eprint     = false,
-  firstinits = true
+  giveninits = true,
+  uniquename = init
 ]{biblatex}
 \addbibresource{pub/publications.bib}
 \DeclareNameAlias{sortname}{family-given}
